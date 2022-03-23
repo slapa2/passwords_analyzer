@@ -1,13 +1,12 @@
 """Password analyzer"""
 
-from password_validator import PasswordValidator
+from file_passwords_validator import FilePasswordValidator
 
 
 def main():
     """main password analyzer function"""
-    print('Hello World')
-    validator = PasswordValidator()
-    print(validator.validate('123456'))
+    validator = FilePasswordValidator()
+    validator.validate()
 
 
 if __name__ == '__main__':
