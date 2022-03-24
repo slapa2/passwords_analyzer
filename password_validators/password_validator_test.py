@@ -1,6 +1,6 @@
 """password_validator tests"""
 
-from password_validator import PasswordValidator
+from password_validators.basic_password_validator import PasswordValidator
 
 
 def test_negative_validate_len():

@@ -1,6 +1,8 @@
 """Password Validator"""
 from typing import List
 
+from password_validators.password_validator_interface import PasswordValidatorInterface
+
 
 class PasswordValidationException(Exception):
     """Exception is risen when password didn't pass validation"""
@@ -18,7 +20,7 @@ class SpecialCharsException(PasswordValidationException):
     """Exception is risen when password hasn't any special character"""
 
 
-class PasswordValidator:
+class PasswordValidator(PasswordValidatorInterface):
     """Basic password validator"""
 
     def __init__(self,
