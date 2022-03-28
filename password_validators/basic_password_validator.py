@@ -9,22 +9,6 @@ class PasswordValidationException(Exception):
     """Exception is risen when password didn't pass validation"""
 
 
-class ToShortPasswordException(PasswordValidationException):
-    """Exception is risen when password is too short"""
-
-
-class LowerCharsException(PasswordValidationException):
-    """Exception is risen when password has no lowercase chars"""
-
-
-class UpperCharsException(PasswordValidationException):
-    """Exception is risen when password has no uppercase chars"""
-
-
-class SpecialCharsException(PasswordValidationException):
-    """Exception is risen when password hasn't any special character"""
-
-
 class PasswordValidator(PasswordValidatorInterface):
     """Basic password validator"""
 
@@ -46,22 +30,22 @@ class PasswordValidator(PasswordValidatorInterface):
 
         try:
             self._validate_len(password)
-        except ToShortPasswordException as exc:
+        except PasswordValidationException as exc:
             errors.append(str(exc))
 
         try:
             self._validate_lower_chars(password)
-        except LowerCharsException as exc:
+        except PasswordValidationException as exc:
             errors.append(str(exc))
 
         try:
             self._validate_upper_chars(password)
-        except UpperCharsException as exc:
+        except PasswordValidationException as exc:
             errors.append(str(exc))
 
         try:
             self._validate_special_characters(password)
-        except SpecialCharsException as exc:
+        except PasswordValidationException as exc:
             errors.append(str(exc))
 
         return errors
@@ -69,26 +53,26 @@ class PasswordValidator(PasswordValidatorInterface):
     def _validate_len(self, password: str) -> None:
         """validate password length"""
         if len(password) < self.password_min_len:
-            raise ToShortPasswordException(
+            raise PasswordValidationException(
                 f'Password must have at least {self.password_min_len} characters')
 
     def _validate_lower_chars(self, password:str) -> None:
         """validate if password has lower and upper characters"""
         lower = [x for x in password if x in string.ascii_lowercase]
         if len(lower) < self.lower_min_counter:
-            raise LowerCharsException(
+            raise PasswordValidationException(
                 f'Password must have at least {self.lower_min_counter} lowercase characters')
 
     def _validate_upper_chars(self, password:str) -> None:
         """validate if password has lower and upper characters"""
         upper = [x for x in password if x in string.ascii_uppercase]
         if len(upper) < self.upper_min_counter:
-            raise UpperCharsException(
+            raise PasswordValidationException(
                 f'Password must have at least {self.upper_min_counter} uppercase characters')
 
     def _validate_special_characters(self, password: str) -> None:
         """validate if password has any special character"""
         special = [x for x in password if x in string.punctuation]
         if len(special) < self.special_min_counter:
-            raise SpecialCharsException(
+            raise PasswordValidationException(
                 f'Password must have at least {self.special_min_counter} special characters')
