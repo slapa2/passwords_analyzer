@@ -17,3 +17,6 @@ To run script main.py
 
 ```python3 main.py```
 
+
+---
+project inspired by [pycamp.pl](https://www.pycamp.pl/)
